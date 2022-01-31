@@ -1,6 +1,8 @@
 const span = document.getElementsByTagName('span');
 const product = document.getElementsByClassName('product')
 const product_page = Math.ceil(product.length / 4);
+let numberOfDots = Math.ceil(product.length / 4);
+const dots = document.getElementById('dots')
 let l = 0;
 let movePer = 25.34;
 let maxMove = 203;
@@ -9,6 +11,13 @@ let mob_view = window.matchMedia("(max-width: 768px)");
 if (mob_view.matches) {
 	movePer = 50.36;
 	maxMove = 504;
+}
+
+while (numberOfDots >= 0) {
+	const dot = document.createElement('div');
+	dots.appendChild(dot);
+	numberOfDots--;
+
 }
 
 const right_mover = () => {

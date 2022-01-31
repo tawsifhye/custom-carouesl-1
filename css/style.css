@@ -76,3 +76,20 @@ section .product {
 img {
 	width: 100%;
 }
+
+#dots {
+	width: 50%;
+	height: 50px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+}
+
+#dots div {
+	height: 10px;
+	width: 10px;
+	border: 1px solid red;
+	display: inline-block;
+	margin-right: 10px;
+
+}
