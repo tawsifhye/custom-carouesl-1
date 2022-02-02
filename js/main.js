@@ -1,6 +1,5 @@
 const span = document.getElementsByTagName('span');
 const product = document.getElementsByClassName('product')
-console.log(product);
 const sliderContainerWidth = 1100;
 
 const dots = document.getElementById('dots')
@@ -48,9 +47,14 @@ const showNav = () => {
 }
 const productList =document.querySelectorAll(".product")
 
-const setItem = (item) =>{
+const setItemWithDots = (item, showDots) =>{
 	const itemPer = 1000/item;
-	
+	const dot = document.getElementById('dots');
+	if(!showDots){
+		
+		dot.style.display = 'none';
+	}
+
 	let numberOfDots = Math.ceil(product.length / item)-1;
 	console.log(numberOfDots);
 	while (numberOfDots >= 1) {
@@ -59,6 +63,8 @@ const setItem = (item) =>{
 		numberOfDots--;
 	
 	}
+	
+	
 
 	productList.forEach(product=>{
 		product.style.minWidth = itemPer + 'px'
@@ -66,8 +72,8 @@ const setItem = (item) =>{
 		
 }
 
-const initializeSlider = (interval, nav, item) => {
-	setItem(item);
+const initializeSlider = (interval, nav, item, showDots) => {
+	setItemWithDots(item, showDots);
 	if (nav) {
 		showNav();
 	}
