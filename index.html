@@ -10,13 +10,15 @@
 
 <body>
 	<main>
+		<input type='hidden' id='current_page' />
+		<input type='hidden' id='show_per_page' />
 		<div class="text">
 			<h1>Simple Single carousel</h1>
 			<p>
 
 			</p>
 		</div>
-		<section>
+		<section id="slider-container">
 			<div class="product">
 
 				<img src="image/banner2.png" alt="">
@@ -168,14 +170,15 @@
 			</div>
 
 		</section>
-		<section id="dots">
-			<div></div>
-		</section>
+		<div id='page_navigation'></div>
 	</main>
-<script type="text/javascript" src="js/main.js"></script>
-<script>
-	initializeSlider(interval = 5000, nav = true, item=5,showDots=true);
-</script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.js"
+		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script>
+		// initializeSlider(interval = 5000, nav = true, item = 2, showDots = true);
+	</script>
 </body>
 
 </html>

@@ -1,4 +1,40 @@
-const span = document.getElementsByTagName('span');
+$(document).ready(() => {
+	const itemsPerPage = 3;
+	const numberOfItems = $('.product').length;
+	const numberOfPages = Math.ceil(numberOfItems / itemsPerPage);
+
+	$('#current_page').val(0);
+	$('#show_per_page').val(itemsPerPage);
+	// console.log($('#current_page').val(), $('#show_per_page').val());
+
+	let navigation_html = '<a class="previous_link" href="javascript:previous();">Prev</a>';
+	let current_link = 0;
+	while (numberOfPages > current_link) {
+		navigation_html += '<a class="page_link" href="javascript:go_to_page(' + current_link + ')" longdesc="' + current_link + '">' + (current_link + 1) + '</a>';
+		current_link++;
+		console.log(navigation_html);
+	}
+	navigation_html += '<a class="next_link" href="javascript:next();">Next</a>';
+
+	$('#page_navigation').html(navigation_html);
+
+	$('#page_navigation .page_link:first').addClass('active_page');
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* const span = document.getElementsByTagName('span');
 const product = document.getElementsByClassName('product')
 const sliderContainerWidth = 1100;
 
@@ -45,44 +81,46 @@ const showNav = () => {
 	<span>&#155;</span>
 `
 }
-const productList =document.querySelectorAll(".product")
+const productList = document.querySelectorAll(".product")
 
-const setItemWithDots = (item, showDots) =>{
-	const itemPer = 1000/item;
+const setItemWithDots = (item, showDots) => {
+	const itemPer = 1000 / item;
 	const dot = document.getElementById('dots');
-	if(!showDots){
-		
+	if (!showDots) {
+
 		dot.style.display = 'none';
 	}
 
-	let numberOfDots = Math.ceil(product.length / item)-1;
+	let numberOfDots = Math.ceil(product.length / item) - 1;
 	console.log(numberOfDots);
 	while (numberOfDots >= 1) {
 		const dot = document.createElement('div');
 		dots.appendChild(dot);
 		numberOfDots--;
-	
-	}
-	
-	
 
-	productList.forEach(product=>{
+	}
+
+
+
+	productList.forEach(product => {
 		product.style.minWidth = itemPer + 'px'
-		})
-		
+	})
+
 }
 
 const initializeSlider = (interval, nav, item, showDots) => {
-	setItemWithDots(item, showDots);
+	setItemWithDots(item, show
+		
+		Dots);
 	if (nav) {
 		showNav();
 	}
-	// if (nav) {
-	// 	span[0].style.display = 'inline-block'
-	// 	span[1].style.display = 'inline-block'
-	// }
+	if (nav) {
+		span[0].style.display = 'inline-block'
+		span[0].onclick = left_mover;
+		span[1].style.display = 'inline-block'
+		span[1].onclick = right_mover;
+	}
 	setInterval(right_mover, interval)
 }
-
-
-
+ */
