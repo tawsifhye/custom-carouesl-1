@@ -37,7 +37,6 @@ p span {
 	line-height: 19px;
 	text-align: center;
 	border-radius: 3px;
-	display: none;
 }
 
 p span:hover {
@@ -46,7 +45,7 @@ p span:hover {
 }
 
 section {
-	width: 98%;
+	width: 1100px;
 	height: 600px;
 	/*background: red;*/
 	margin: auto;
@@ -59,7 +58,9 @@ section {
 
 
 section .product {
-	min-width: 24%;
+	/* min-width: 500px; */
+	/* min-width: 100%; */
+	/* width: 1130px; */
 	height: 90%;
 	background: whitesmoke;
 	margin: 0 20px 0 0;

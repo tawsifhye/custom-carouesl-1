@@ -1,24 +1,19 @@
 const span = document.getElementsByTagName('span');
 const product = document.getElementsByClassName('product')
-const product_page = Math.ceil(product.length / 4);
-let numberOfDots = Math.ceil(product.length / 4);
+console.log(product);
+const sliderContainerWidth = 1100;
+
 const dots = document.getElementById('dots')
 let l = 0;
 let movePer = 25.34;
 let maxMove = 203;
 // mobile_view	
-let mob_view = window.matchMedia("(max-width: 768px)");
-if (mob_view.matches) {
-	movePer = 50.36;
-	maxMove = 504;
-}
+// let mob_view = window.matchMedia("(max-width: 768px)");
+// if (mob_view.matches) {
+// 	movePer = 50.36;
+// 	maxMove = 504;
+// }
 
-while (numberOfDots >= 0) {
-	const dot = document.createElement('div');
-	dots.appendChild(dot);
-	numberOfDots--;
-
-}
 
 const right_mover = () => {
 	l = l + movePer;
@@ -39,17 +34,49 @@ const left_mover = () => {
 		}
 	}
 }
-span[1].onclick = () => { right_mover(); }
-span[0].onclick = () => { left_mover(); }
+// span[1].onclick = () => { right_mover(); }
+// span[0].onclick = () => { left_mover(); }
 
 // setInterval(right_mover, 2000)
 
-const initializeSlider = (interval, nav) => {
-	if (nav) {
-		span[0].style.display = 'inline-block'
-		span[1].style.display = 'inline-block'
+const showNav = () => {
+	const div = document.querySelector('.text p');
+	div.innerHTML = `
+	<span>&#139;</span>
+	<span>&#155;</span>
+`
+}
+const productList =document.querySelectorAll(".product")
+
+const setItem = (item) =>{
+	const itemPer = 1000/item;
+	
+	let numberOfDots = Math.ceil(product.length / item)-1;
+	console.log(numberOfDots);
+	while (numberOfDots >= 1) {
+		const dot = document.createElement('div');
+		dots.appendChild(dot);
+		numberOfDots--;
+	
 	}
+
+	productList.forEach(product=>{
+		product.style.minWidth = itemPer + 'px'
+		})
+		
+}
+
+const initializeSlider = (interval, nav, item) => {
+	setItem(item);
+	if (nav) {
+		showNav();
+	}
+	// if (nav) {
+	// 	span[0].style.display = 'inline-block'
+	// 	span[1].style.display = 'inline-block'
+	// }
 	setInterval(right_mover, interval)
 }
 
-initializeSlider(interval = 5000, nav = true);
+
+
