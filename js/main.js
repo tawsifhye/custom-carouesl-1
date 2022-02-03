@@ -1,4 +1,20 @@
 let isLoop = false;
+let saveInterval;
+let autoPlaySlide;
+
+
+const moveForward = () => {
+	const newPage = parseInt($('#current_page').val()) + 1;
+	if ($('.active_page').next('.page_link').length == 0 && isLoop) {
+
+		goToPage(0);
+
+	}
+	else if ($('.active_page').next('.page_link').length == 1) {
+
+		goToPage(newPage);
+	}
+}
 
 const initializeSlider = (props) => {
 	console.log(props);
@@ -9,7 +25,6 @@ const initializeSlider = (props) => {
 
 	$('#current_page').val(0);
 	$('#show_per_page').val(itemsPerPage);
-	// console.log($('#current_page').val(), $('#show_per_page').val());
 
 	let navigation_html = '<a class="previous_link" href="javascript:previous();">Prev</a>';
 	let current_link = 0;
@@ -36,13 +51,11 @@ const initializeSlider = (props) => {
 	}
 
 	if (props.interval) {
-		setInterval(next, props.interval);
+		saveInterval = props.interval;
+		autoPlaySlide = setInterval(moveForward, props.interval);
 	}
 
-
-
 }
-
 
 
 const previous = () => {
@@ -53,34 +66,16 @@ const previous = () => {
 }
 
 const next = () => {
-
-	console.log(isLoop);
-	const newPage = parseInt($('#current_page').val()) + 1;
-	if ($('.active_page').next('.page_link').length == 0 && isLoop) {
-
-		goToPage(0);
-
-	}
-	else if ($('.active_page').next('.page_link').length == 1) {
-
-		goToPage(newPage);
-	}
-	// console.log(($('.active_page').next('.page_link').length < 0 && loop == true));
-
-
-
-
+	clearInterval(autoPlaySlide);
+	moveForward();
+	autoPlaySlide = setInterval(moveForward, saveInterval);
 }
 
 
 const goToPage = (pageNum) => {
-
 	let itemsPerPage = parseInt($('#show_per_page').val())
 	let startFrom = pageNum * itemsPerPage;
-	// console.log(startFrom);
 	let endOn = startFrom + itemsPerPage;
-	// console.log(endOn);
-
 	$('#slider-container').children().css('display', 'none').slice(startFrom, endOn).css('display', 'block');
 	$('.page_link[value=' + pageNum + ']').addClass('active_page').siblings('.active_page').removeClass('active_page');
 	$('#current_page').val(pageNum);
@@ -89,100 +84,3 @@ const goToPage = (pageNum) => {
 
 
 
-
-
-
-
-
-
-
-/* const span = document.getElementsByTagName('span');
-const product = document.getElementsByClassName('product')
-const sliderContainerWidth = 1100;
-
-const dots = document.getElementById('dots')
-let l = 0;
-let movePer = 25.34;
-let maxMove = 203;
-// mobile_view	
-// let mob_view = window.matchMedia("(max-width: 768px)");
-// if (mob_view.matches) {
-// 	movePer = 50.36;
-// 	maxMove = 504;
-// }
-
-
-const right_mover = () => {
-	l = l + movePer;
-	if (product == 1) { l = 0; }
-	for (const i of product) {
-		if (l > maxMove) { l = 0; }
-		i.style.left = '-' + l + '%';
-
-	}
-
-}
-const left_mover = () => {
-	l = l - movePer;
-	if (l <= 0) { l = 0; }
-	for (const i of product) {
-		if (product_page > 1) {
-			i.style.left = '-' + l + '%';
-		}
-	}
-}
-// span[1].onclick = () => { right_mover(); }
-// span[0].onclick = () => { left_mover(); }
-
-// setInterval(right_mover, 2000)
-
-const showNav = () => {
-	const div = document.querySelector('.text p');
-	div.innerHTML = `
-	<span>&#139;</span>
-	<span>&#155;</span>
-`
-}
-const productList = document.querySelectorAll(".product")
-
-const setItemWithDots = (item, showDots) => {
-	const itemPer = 1000 / item;
-	const dot = document.getElementById('dots');
-	if (!showDots) {
-
-		dot.style.display = 'none';
-	}
-
-	let numberOfDots = Math.ceil(product.length / item) - 1;
-	console.log(numberOfDots);
-	while (numberOfDots >= 1) {
-		const dot = document.createElement('div');
-		dots.appendChild(dot);
-		numberOfDots--;
-
-	}
-
-
-
-	productList.forEach(product => {
-		product.style.minWidth = itemPer + 'px'
-	})
-
-}
-
-const initializeSlider = (interval, nav, item, showDots) => {
-	setItemWithDots(item, show
-		
-		Dots);
-	if (nav) {
-		showNav();
-	}
-	if (nav) {
-		span[0].style.display = 'inline-block'
-		span[0].onclick = left_mover;
-		span[1].style.display = 'inline-block'
-		span[1].onclick = right_mover;
-	}
-	setInterval(right_mover, interval)
-}
- */
