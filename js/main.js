@@ -1,7 +1,7 @@
 let isLoop = false;
 let saveInterval;
 let autoPlaySlide;
-
+let autoplay = false;
 
 const moveForward = () => {
 	const newPage = parseInt($('#current_page').val()) + 1;
@@ -44,6 +44,8 @@ const initializeSlider = (props) => {
 	}
 	$('#page_navigation .page_link:first').addClass('active_page');
 	$('#slider-container').children().css('display', 'none');
+	$('#slider-container').children().css('animation', props.animation);
+	$('#slider-container').children().css('animation-duration', props.animationDuration);
 	$('#slider-container').children().slice(0, itemsPerPage).css('display', 'block');
 
 	if (props.loop) {
@@ -51,6 +53,7 @@ const initializeSlider = (props) => {
 	}
 
 	if (props.interval) {
+		autoplay = true
 		saveInterval = props.interval;
 		autoPlaySlide = setInterval(moveForward, props.interval);
 	}
@@ -66,9 +69,13 @@ const previous = () => {
 }
 
 const next = () => {
-	clearInterval(autoPlaySlide);
+	if (autoplay) {
+		clearInterval(autoPlaySlide);
+		autoPlaySlide = setInterval(moveForward, saveInterval);
+	}
+
 	moveForward();
-	autoPlaySlide = setInterval(moveForward, saveInterval);
+
 }
 
 

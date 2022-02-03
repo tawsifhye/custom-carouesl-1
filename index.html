@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Simple responsive owl carousel</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -14,9 +15,6 @@
 		<input type='hidden' id='show_per_page' />
 		<div class="text">
 			<h1>Simple Single carousel</h1>
-			<p>
-
-			</p>
 		</div>
 		<section id="slider-container">
 			<div class="product">
@@ -183,6 +181,8 @@
 			item: 5,
 			showDots: true,
 			loop: true,
+			animation: 'fadeInRight', //animation name from animate.style cdn used
+			animationDuration: '2s',
 		})
 	</script>
 </body>
