@@ -1,42 +1,45 @@
+let isLoop = false;
+
 const initializeSlider = (props) => {
 	console.log(props);
-	$(document).ready(() => {
-		const itemsPerPage = props.item;
-		const numberOfItems = $('.product').length;
-		const numberOfPages = Math.ceil(numberOfItems / itemsPerPage);
 
-		$('#current_page').val(0);
-		$('#show_per_page').val(itemsPerPage);
-		// console.log($('#current_page').val(), $('#show_per_page').val());
+	const itemsPerPage = props.item;
+	const numberOfItems = $('.product').length;
+	const numberOfPages = Math.ceil(numberOfItems / itemsPerPage);
 
-		let navigation_html = '<a class="previous_link" href="javascript:previous();">Prev</a>';
-		let current_link = 0;
-		while (numberOfPages > current_link) {
-			navigation_html += '<a class="page_link" href="javascript:goToPage(' + current_link + ')" value="' + current_link + '">' + (current_link + 1) + '</a>';
-			current_link++;
-		}
-		navigation_html += '<a class="next_link" href="javascript:next();">Next</a>';
+	$('#current_page').val(0);
+	$('#show_per_page').val(itemsPerPage);
+	// console.log($('#current_page').val(), $('#show_per_page').val());
 
-		$('#page_navigation').html(navigation_html);
-		if (!props.nav) {
-			$('.previous_link').css('display', 'none');
-			$('.next_link').css('display', 'none');
-		}
-		if (!props.showDots) {
-			$('.page_link').css('display', 'none');
-		}
-		$('#page_navigation .page_link:first').addClass('active_page');
-		$('#slider-container').children().css('display', 'none');
-		$('#slider-container').children().slice(0, itemsPerPage).css('display', 'block')
-	});
+	let navigation_html = '<a class="previous_link" href="javascript:previous();">Prev</a>';
+	let current_link = 0;
+	while (numberOfPages > current_link) {
+		navigation_html += '<a class="page_link" href="javascript:goToPage(' + current_link + ')" value="' + current_link + '">' + (current_link + 1) + '</a>';
+		current_link++;
+	}
+	navigation_html += '<a class="next_link" href="javascript:next();">Next</a>';
 
-	// if (props.loop) {
-	// 	next(true);
-	// }
+	$('#page_navigation').html(navigation_html);
+	if (!props.nav) {
+		$('.previous_link').css('display', 'none');
+		$('.next_link').css('display', 'none');
+	}
+	if (!props.showDots) {
+		$('.page_link').css('display', 'none');
+	}
+	$('#page_navigation .page_link:first').addClass('active_page');
+	$('#slider-container').children().css('display', 'none');
+	$('#slider-container').children().slice(0, itemsPerPage).css('display', 'block');
+
+	if (props.loop) {
+		isLoop = true;
+	}
 
 	if (props.interval) {
 		setInterval(next, props.interval);
 	}
+
+
 
 }
 
@@ -49,19 +52,24 @@ const previous = () => {
 	}
 }
 
-const next = (loop) => {
-	const isLoop = loop;
-	// console.log(isLoop);
+const next = () => {
+
+	console.log(isLoop);
 	const newPage = parseInt($('#current_page').val()) + 1;
-	console.log($('.active_page').next('.page_link').length);
-	if ($('.active_page').next('.page_link').length == true) {
+	if ($('.active_page').next('.page_link').length == 0 && isLoop) {
+
+		goToPage(0);
+
+	}
+	else if ($('.active_page').next('.page_link').length == 1) {
+
 		goToPage(newPage);
 	}
 	// console.log(($('.active_page').next('.page_link').length < 0 && loop == true));
 
-	if ($('.active_page').next('.page_link').length == 0) {
-		goToPage(0);
-	}
+
+
+
 }
 
 
